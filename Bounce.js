@@ -1,5 +1,4 @@
 window.onload = function() {
-    let btn = document.getElementById("jump");
     let context = canvas.getContext("2d")
     let count = 0;
 
@@ -12,11 +11,19 @@ window.onload = function() {
     context.fillStyle="red";
     context.fill();
 
-    btn.onclick = function() {
+    // Move the shape with any pressed keyboard's button
+    document.onkeydown = function() {
         count += 1;
-        // Changing the y position
         y -= 25;
         draw();
+    }
+
+    // Move the shape when screen is touched
+    document.ontouchstart = function() {
+        count += 1;
+        y -= 25;
+        draw();
+    }
 
     function draw(){
         // If the circle touch the top returns to original position
@@ -37,6 +44,5 @@ window.onload = function() {
         context.fillStyle = 'white';
         context.fillText("Count: " + count, 20, 30);
         window.requestAnimationFrame(draw);
-        }
     }
 }
